@@ -1,0 +1,56 @@
+<!doctype HTML>
+<meta charset = 'utf-8'>
+<html>
+  <head>
+    
+    <script src='C:/Program Files/R/R-3.1.2/library/rCharts/libraries/polycharts/js/polychart2.standalone.js' type='text/javascript'></script>
+    
+    <style>
+    .rChart {
+      display: block;
+      margin-left: auto; 
+      margin-right: auto;
+      width: 800px;
+      height: 400px;
+    }  
+    </style>
+    
+  </head>
+  <body >
+    
+    <div id = 'chart220011f410f' class = 'rChart polycharts'></div>    
+    <script type='text/javascript'>
+    var chartParams = {
+ "dom": "chart220011f410f",
+"width":    800,
+"height":    400,
+"layers": [
+ {
+ "x": "Response",
+"y": "Count",
+"data": {
+ "Response": [ "Improve a lot", "Improve a little", "Remain the same", "Worsen a little", "Worsen a lot", "Don't know", "Refused" ],
+"Count": [ 91, 348, 223, 170, 146, 17, 7 ] 
+},
+"facet": null,
+"type": "bar" 
+} 
+],
+"facet": [],
+"guides": {
+ "x": {
+ "levels": [ "Worsen a lot", "Worsen a little", "Remain the same", "Improve a little", "Improve a lot", "Refused" ] 
+} 
+},
+"coord": [],
+"id": "chart220011f410f" 
+}
+    _.each(chartParams.layers, function(el){
+        el.data = polyjs.data(el.data)
+    })
+    var graph_chart220011f410f = polyjs.chart(chartParams);
+</script>
+    
+    <script></script>    
+  </body>
+</html>

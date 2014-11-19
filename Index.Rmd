@@ -1,0 +1,301 @@
+---
+title: "Pew Global"
+author: "Aaron Grenz & Marie Marshall"
+output: html_document
+---
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+library(dplyr)
+library(ggplot2)
+library(ggmap)
+library(gridExtra)
+library(reshape2)
+library(tm)
+library(wordcloud)
+library(stringr)
+library(scales)
+library(googleVis)
+library(datasets)
+library(rCharts)
+```
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+##Load data table into the global environment.
+
+load("C:/Users/b021494/Desktop/DataViz/GitHub/pewglobal/mydata.Rda")
+
+```
+
+### Question #1
+Overall, are you satisfied or dissatisfied with the way things are going in our country today? 
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+q1 <- mydata %>%
+  select(COUNTRY,Q1) %>%
+  filter(COUNTRY=="United States")
+
+q1df=as.data.frame(table(q1$Q1))
+
+colnames(q1df)=c("Response","Count")
+
+rp1 = rPlot(x = "Response", y = "Count", data = q1df, type = "bar")
+
+rp1$guides(x = list(levels = c('Dissatisfied', 'Satisfied', 'Refused')))
+
+rp1$save('rp1.html')
+
+```
+<iframe src="rp1.html" width="100%" height="500px"></iframe>
+
+This graph displays the responses from 1002 United States citizens answer to the question. Interestingly, the most common response was "dissatisfied". A total of 688 people stated they were dissatisfied with the way things are going in our country today. On the other hand, 293 people stated they were satisfied. In the United States, the majority of individuals are dissatisfied with the way things are going in our country today.
+
+### Question #4
+Now thinking about our economic situation, how would you describe the current economic situation in the United States - is it very good, somewhat good, somewhat bad or very bad?  
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+q4 <- mydata %>%
+  select(COUNTRY,Q4) %>%
+  filter(COUNTRY=="United States")
+
+q4df=as.data.frame(table(q4$Q4))
+
+colnames(q4df)=c("Response","Count")
+
+rp4 = rPlot(x = "Response", y = "Count", data = q4df, type = "bar")
+
+rp4$guides(x = list(levels = c('Very bad', 'Somewhat bad', 'Somewhat good', 'Very good', 'Refused')))
+
+rp4$save('rp4.html')
+
+```
+<iframe src="rp4.html" width="100%" height="500px"></iframe>
+
+This graph displays the responses from 1002 United States citizens answer to the question. In the United States, the majority of individuals believe the country's ecocomy is somewhat bad.  About the same frequency of individuals believe the economy is somewhat good as very bad, as well.
+
+### Question #5
+And over the next 12 months do you expect the economic situation in our country to improve a lot, improve a little, remain the same, worsen a little or worsen a lot?    
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+q5 <- mydata %>%
+  select(COUNTRY,Q5) %>%
+  filter(COUNTRY=="United States")
+
+q5df=as.data.frame(table(q5$Q5))
+
+colnames(q5df)=c("Response","Count")
+
+rp5 = rPlot(x = "Response", y = "Count", data = q5df, type = "bar")
+
+rp5$guides(x = list(levels = c('Worsen a lot', 'Worsen a little', 'Remain the same', 'Improve a little', 'Improve a lot', 'Refused')))
+
+rp5$save('rp5.html')
+
+```
+<iframe src="rp5.html" width="100%" height="500px"></iframe>
+
+This graph displays the responses from 1002 United States citizens answer to the question. In the United States, the majority of individuals expect the country's economic situation to "improve a little".
+
+### Question #6
+Now thinking about your personal economic situation, how would you describe it - is it very good, somewhat good, somewhat bad or very bad?   
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+q6 <- mydata %>%
+  select(COUNTRY,Q6) %>%
+  filter(COUNTRY=="United States")
+
+q6df=as.data.frame(table(q6$Q6))
+
+colnames(q6df)=c("Response","Count")
+
+rp6 = rPlot(x = "Response", y = "Count", data = q6df, type = "bar")
+
+rp6$guides(x = list(levels = c('Very bad', 'Somewhat bad', 'Somewhat good', 'Very good', 'Refused')))
+
+rp6$save('rp6.html')
+
+```
+<iframe src="rp6.html" width="100%" height="500px"></iframe>
+
+In the United States, the majority of individuals believe their personal financial situation is "somewhat good".
+
+### Question #7
+And over the next 12 months do you expect your personal economic situation to improve a lot, improve a little, remain the same, worsen a little or worsen a lot? 
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+q7 <- mydata %>%
+  select(COUNTRY,Q7) %>%
+  filter(COUNTRY=="United States")
+
+q7df=as.data.frame(table(q7$Q7))
+
+colnames(q7df)=c("Response","Count")
+
+rp7 = rPlot(x = "Response", y = "Count", data = q7df, type = "bar")
+
+rp7$guides(x = list(levels = c('Worsen a lot', 'Worsen a little', 'Remain the same', 'Improve a little', 'Improve a lot', 'Refused')))
+
+rp7$save('rp7.html')
+
+```
+<iframe src="rp7.html" width="100%" height="500px"></iframe>
+
+In the United Sates the majority of individuals expect their personal economic situation to remain the same over the next 12 months.
+
+### Question #8
+When children today in the United States grow up, do you think they will be better off or worse off financially than their parents?
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+q8 <- mydata %>%
+  select(COUNTRY,Q8) %>%
+  filter(COUNTRY=="United States")
+
+q8df=as.data.frame(table(q8$Q8))
+
+colnames(q8df)=c("Response","Count")
+
+rp8 = rPlot(x = "Response", y = "Count", data = q8df, type = "bar")
+
+rp8$guides(x = list(levels = c('Worsen off', 'Same (Volunteered)', 'Better off', 'Refused')))
+
+rp8$save('rp8.html')
+
+```
+<iframe src="rp8.html" width="100%" height="500px"></iframe>
+
+In the United States the majority of individuals believe that children today will worse off financially than their parents.
+
+### Question #47US
+In making international policy decisions, to what extent do you think the United States takes into account the interests of other countries around the world - a great deal, a fair amount, not too much, or not at all?
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+q47US <- mydata %>%
+  select(COUNTRY,Q47US) %>%
+  filter(COUNTRY=="United States")
+
+q47USdf=as.data.frame(table(q47US$Q47US))
+
+colnames(q47USdf)=c("Response","Count")
+
+rp47US = rPlot(x = "Response", y = "Count", data = q47USdf, type = "bar")
+
+rp47US$guides(x = list(levels = c('Not at all', 'Not too much', 'Fair amount','Great deal' ,'Refused')))
+
+rp47US$save('rp47US.html')
+
+```
+<iframe src="rp47US.html" width="100%" height="500px"></iframe>
+
+In the United States the majority of individuals believe the United States takes into account the interests of other countries around the world a fair amount.
+
+### Question #164
+Gender (RECORD BY OBSERVATION).
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+q164 <- mydata %>%
+  select(COUNTRY,Q164) %>%
+  filter(COUNTRY=="United States")
+
+q164df=as.data.frame(table(q164$Q164))
+
+colnames(q164df)=c("Response","Count")
+
+rp164 = rPlot(x = "Response", y = "Count", data = q164df, type = "bar")
+
+rp164$save('rp164.html')
+
+```
+<iframe src="rp164.html" width="100%" height="500px"></iframe>
+
+This graph displays the gender of survey respondents in the United Stated. It was simply recorded by observation. The graph shows that there was thirty-six more females who took the survey than males.
+
+### Question #165
+How old were you at your last birthday?
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+mydata$Q165 <- as.numeric(as.character(mydata$Q165))
+
+q165 <- mydata %>%
+  select(COUNTRY,Q165) %>%
+  filter(COUNTRY=="United States")
+
+rp165 = rPlot(x = "bin(Q165,5)", y = "count(Q165)", data = q165, type = "bar")
+
+rp165$guides(x = list(title = 'Age'), y = list(title = 'Count'))
+
+rp165$save('rp165.html')
+
+```
+<iframe src="rp165.html" width="100%" height="500px"></iframe>
+
+This graph displays the age range for the United States respondents. This graph shows the pew research team surveyed a wide range of ages.
+
+### Question Political Party in the US
+In politics TODAY, do you consider yourself a Republican, Democrat, or Independent? 
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+qParty <- mydata %>%
+  select(COUNTRY,PARTY) %>%
+  filter(COUNTRY=="United States")
+
+qPartydf=as.data.frame(table(qParty$PARTY))
+
+colnames(qPartydf)=c("Response","Count")
+
+rpParty = rPlot(x = "Response", y = "Count", data = qPartydf, type = "bar")
+
+rpParty$guides(x = list(levels = c('Democrat', 'Republican', 'Independent','Other party (Volunteered)','Refused', 'No preference (Volunteered)')))
+
+rpParty$save('rpParty.html')
+
+```
+<iframe src="rpParty.html" width="100%" height="500px"></iframe>
+
+In the United States, the majority of idividuals claimed they were Independent.
+
+### Question Political Party Lean in the US
+As of today do you lean more to the Republican Party or more to the Democratic Party? 
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+
+qPartyLn <- mydata %>%
+  select(COUNTRY,PARTYLN) %>%
+  filter(COUNTRY=="United States",PARTYLN!="NA")
+
+qPartyLndf=as.data.frame(table(qPartyLn$PARTYLN))
+
+colnames(qPartyLndf)=c("Response","Count")
+
+rpPartyLn = rPlot(x = "Response", y = "Count", data = qPartyLndf, type = "bar")
+
+rpPartyLn$guides(x = list(levels = c('Democrat', 'Republican', 'Other (Volunteered)','Refused')))
+
+rpPartyLn$save('rpPartyLn.html')
+
+```
+<iframe src="rpPartyLn.html" width="100%" height="500px"></iframe>
+
+In the United States, the majority of idividuals lean more to the Democratic party.
+
+###Extra Graphs
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+ggplot(mydata,aes(x=Q164)) + geom_bar() + stat_bin() + theme(axis.text.x = element_text(angle=-90), axis.text.y = element_blank()) + ggtitle("Gender of Survey Participants By Country") + xlab("Gender") + theme(legend.position="none")+ facet_wrap(~COUNTRY,ncol=5,scales="free_y")
+
+```
+
+
+```{r,echo=FALSE, warning=FALSE,message=FALSE}
+ggplot(mydata,aes(x=Q165)) + geom_bar() + stat_bin() + theme(axis.text.x = element_text(angle=-90), axis.text.y = element_blank()) + ggtitle("Age of Survey Participants By Country ") + xlab("Age") + theme(legend.position="none")+ facet_wrap(~COUNTRY,ncol=5,scales="free_y")
+
+```
